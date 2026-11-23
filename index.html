@@ -1,163 +1,966 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0f6e56">
-<meta name="description" content="CleanLoop is a smart dump area management platform for municipal corporations, field teams and citizens.">
-<title>CleanLoop | Smart Dump Area Management</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0F6E56">
+<title>CleanLoop | Smart Waste Management</title>
+
 <style>
-:root{--forest:#0f6e56;--emerald:#1d9e75;--mint:#5dcaa5;--deep:#12332b;--ink:#183c33;--muted:#60746d;--pale:#eaf6f1;--bg:#f7fbf8;--white:#fff;--line:#dcebe4;--shadow:0 18px 50px rgba(18,51,43,.10)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}a{color:inherit;text-decoration:none}.container{width:min(1160px,calc(100% - 40px));margin:auto}
-header{position:sticky;top:0;z-index:20;background:rgba(247,251,248,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(220,235,228,.8)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.35rem;letter-spacing:-.7px}.brandmark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,var(--emerald),var(--forest));display:grid;place-items:center;color:#fff;box-shadow:0 8px 20px rgba(29,158,117,.22)}.brandmark svg{width:27px;height:27px}.brand span{color:var(--emerald)}.navlinks{display:flex;align-items:center;gap:28px;color:#486158;font-size:.93rem;font-weight:600}.navlinks a:hover{color:var(--emerald)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 19px;border-radius:12px;background:var(--forest);color:#fff;font-weight:700;border:1px solid var(--forest);box-shadow:0 8px 20px rgba(15,110,86,.16);transition:.2s}.btn:hover{transform:translateY(-2px);background:#0b5c48}.btn.secondary{background:#fff;color:var(--forest);box-shadow:none;border-color:var(--line)}.menu{display:none;border:0;background:none;font-size:1.5rem;color:var(--deep)}
-.hero{padding:78px 0 70px;overflow:hidden;background:radial-gradient(circle at 88% 24%,#d9f5e8 0,transparent 27%),linear-gradient(180deg,#f8fcf9,#eff8f3)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:52px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #c9e9da;border-radius:999px;background:#f1fbf5;color:var(--forest);font-size:.8rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.dot{width:8px;height:8px;background:var(--emerald);border-radius:50%}h1{font-size:clamp(2.6rem,5.2vw,4.65rem);line-height:1.04;letter-spacing:-.055em;margin:20px 0;color:var(--deep)}h1 em{font-style:normal;color:var(--emerald)}.hero-copy{font-size:1.12rem;color:var(--muted);max-width:590px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 24px}.trustline{display:flex;align-items:center;gap:10px;color:#71837c;font-size:.86rem}.trustline svg{color:var(--emerald);flex:none}
-.dashboard{position:relative;background:#fff;border:1px solid #dcebe4;border-radius:24px;padding:18px;box-shadow:var(--shadow);transform:rotate(1deg)}.dash-top{display:flex;justify-content:space-between;align-items:center;padding:4px 3px 15px;border-bottom:1px solid #edf3ef}.dash-title{font-weight:800;color:var(--deep)}.live{font-size:.72rem;color:var(--forest);background:#e7f7ef;padding:5px 9px;border-radius:99px;font-weight:800}.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin:15px 0}.metric{background:#f6faf7;border:1px solid #e7f0eb;border-radius:14px;padding:14px}.metric small{display:block;color:#70827a;font-size:.75rem}.metric strong{font-size:1.65rem;color:var(--deep);letter-spacing:-1px}.metric .sub{font-size:.7rem;color:var(--emerald)}.map-card{height:180px;border-radius:15px;overflow:hidden;position:relative;background-color:#e8f4ed;background-image:linear-gradient(32deg,transparent 47%,#fff 48%,#fff 51%,transparent 52%),linear-gradient(110deg,transparent 46%,#fff 47%,#fff 50%,transparent 51%),linear-gradient(0deg,transparent 48%,#fff 49%,#fff 51%,transparent 52%);background-size:130px 100px,160px 130px,100% 70px}.map-label{position:absolute;left:14px;top:12px;background:#fff;padding:6px 10px;border-radius:8px;font-size:.72rem;font-weight:800;box-shadow:0 4px 12px #12332b14}.pin{position:absolute;width:15px;height:15px;background:var(--emerald);border:3px solid white;border-radius:50%;box-shadow:0 2px 8px #12332b40}.pin.p1{left:24%;top:38%}.pin.p2{left:58%;top:61%;background:#e59a28}.pin.p3{left:78%;top:27%;background:#c94b43}.map-legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:12px;color:#687b73;font-size:.7rem}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
-.section{padding:82px 0}.section-head{text-align:center;max-width:720px;margin:0 auto 42px}.kicker{color:var(--emerald);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem}.section h2{font-size:clamp(2rem,3.5vw,3rem);line-height:1.12;letter-spacing:-.04em;color:var(--deep);margin:10px 0 13px}.section-head p{color:var(--muted);margin:0;font-size:1.03rem}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 7px 24px rgba(18,51,43,.035)}.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--pale);color:var(--forest);margin-bottom:18px}.icon svg{width:25px;height:25px}.feature h3{margin:0 0 7px;color:var(--deep);font-size:1.08rem}.feature p{margin:0;color:var(--muted);font-size:.92rem}
-.workflow{background:var(--deep);color:#fff}.workflow .section-head h2{color:#fff}.workflow .section-head p{color:#bfd0c8}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:22px;border:1px solid #31564a;background:#194337;border-radius:17px}.step-num{font-size:.76rem;font-weight:900;color:#8ee0bd;letter-spacing:.1em}.step h3{margin:12px 0 6px;font-size:1.05rem}.step p{margin:0;color:#c2d5cc;font-size:.88rem}
-.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.role{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);padding:18px;border-radius:15px}.role .icon{margin:0;flex:none;width:42px;height:42px}.role h3{margin:0 0 4px;font-size:.98rem}.role p{margin:0;color:var(--muted);font-size:.84rem}
-.platform{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}.platform-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 8px 25px rgba(18,51,43,.04)}.platform-card h3{font-size:1.35rem;color:var(--deep);margin:15px 0 8px}.platform-card p{color:var(--muted)}.platform-card ul{padding-left:19px;color:#496259}.platform-card li{margin:7px 0}.platform-visual{height:150px;border-radius:15px;background:linear-gradient(135deg,#e6f7ee,#f7fbf8);display:flex;align-items:center;justify-content:center;gap:13px;color:var(--forest)}.tile{background:#fff;border:1px solid #dcebe4;border-radius:12px;padding:14px;box-shadow:0 6px 15px #12332b0d;font-size:.8rem;font-weight:800}
-.cta{padding:65px 0;background:linear-gradient(120deg,#0f6e56,#1d9e75);color:#fff}.cta-box{display:flex;justify-content:space-between;align-items:center;gap:25px}.cta h2{font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.1;margin:0 0 10px;letter-spacing:-.04em}.cta p{margin:0;color:#d7f2e5}.cta .btn{background:#fff;color:var(--forest);border-color:#fff;box-shadow:none}
-.contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}.contact-info p{color:var(--muted)}form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:var(--shadow)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-size:.82rem;font-weight:700;color:#425a50;margin-bottom:6px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid #d8e6df;border-radius:10px;font:inherit;color:var(--ink);background:#fcfefd}input:focus,select:focus,textarea:focus{outline:3px solid #d8f2e5;border-color:var(--emerald)}.field{margin-bottom:14px}.full{grid-column:1/-1}textarea{min-height:105px;resize:vertical}.form-note{font-size:.78rem;color:#71827b;margin:12px 0 0}#formMessage{display:none;margin-top:12px;color:var(--forest);font-weight:700;font-size:.9rem}
-footer{background:#0b2b23;color:#d2e2da;padding:32px 0}.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-brand{font-weight:800;font-size:1.2rem}.footer-brand span{color:#65d0a5}.footer-small{font-size:.8rem;color:#a9c0b5}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:35px}.dashboard{max-width:600px;margin:auto;transform:none}.features{grid-template-columns:repeat(2,1fr)}.roles{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:650px){.container{width:min(100% - 30px,1160px)}.nav{height:66px}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;background:#f7fbf8;padding:18px 22px 22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.nav>.btn{display:none}.menu{display:block}.hero{padding:55px 0}.hero-grid{gap:30px}.hero-copy{font-size:1rem}.section{padding:62px 0}.features,.roles,.steps,.platform,.contact{grid-template-columns:1fr}.cta-box{align-items:flex-start;flex-direction:column}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.footer-row{align-items:flex-start;flex-direction:column}.dashboard{padding:12px}.metric strong{font-size:1.4rem}}
+:root {
+  --green:#0F6E56;
+  --emerald:#1D9E75;
+  --mint:#5DCAA5;
+  --dark:#12332B;
+  --light:#E8F5EF;
+  --white:#FFFFFF;
+  --gray:#64756E;
+  --border:#DCEAE3;
+  --shadow:0 8px 25px rgba(18,51,43,.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:#F5FAF7;
+  color:var(--dark);
+  line-height:1.6;
+}
+
+button,input,textarea,select { font:inherit; }
+
+button { cursor:pointer; }
+
+.container {
+  width: min(1150px,92%);
+  margin:auto;
+}
+
+header {
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+
+.navbar {
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--dark);
+  font-size:27px;
+  font-weight:800;
+}
+
+.brand span span { color:var(--emerald); }
+
+.logo {
+  width:43px;
+  height:48px;
+}
+
+nav {
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+nav a {
+  text-decoration:none;
+  color:var(--dark);
+  font-weight:600;
+  font-size:14px;
+}
+
+nav a:hover { color:var(--emerald); }
+
+.btn {
+  border:0;
+  padding:12px 22px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  transition:.2s;
+}
+
+.btn-primary {
+  background:var(--green);
+  color:white;
+}
+
+.btn-primary:hover { background:var(--dark); }
+
+.btn-light {
+  background:white;
+  color:var(--green);
+}
+
+.hero {
+  padding:85px 0;
+  background:linear-gradient(120deg,#E8F5EF,#F8FCFA);
+}
+
+.hero-grid {
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:45px;
+  align-items:center;
+}
+
+.tag {
+  color:var(--green);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.hero h1 {
+  font-size:clamp(38px,5vw,60px);
+  line-height:1.12;
+  margin:18px 0;
+  color:var(--dark);
+}
+
+.hero h1 span { color:var(--emerald); }
+
+.hero p {
+  color:var(--gray);
+  font-size:17px;
+  max-width:590px;
+  margin-bottom:28px;
+}
+
+.hero-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.hero-visual {
+  background:var(--green);
+  border-radius:28px;
+  padding:45px 25px;
+  text-align:center;
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.hero-visual .big-icon {
+  font-size:115px;
+  line-height:1.5;
+}
+
+.hero-visual h2 { font-size:27px; }
+
+.hero-visual p { color:#D7F3E8; margin:10px auto 0; }
+
+section { padding:75px 0; }
+
+.section-heading {
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.section-heading h2 {
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.section-heading p { color:var(--gray); }
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-top:-35px;
+  position:relative;
+}
+
+.stat-card {
+  background:white;
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+}
+
+.stat-card h3 {
+  color:var(--green);
+  font-size:32px;
+}
+
+.stat-card p { color:var(--gray); font-size:14px; }
+
+.dashboard {
+  background:white;
+}
+
+.dashboard-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card {
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.card-icon {
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.card h3 { margin-bottom:8px; }
+
+.card p { color:var(--gray); font-size:14px; }
+
+.report-section {
+  background:var(--light);
+}
+
+.report-layout {
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:35px;
+  align-items:start;
+}
+
+.report-info h2 {
+  font-size:35px;
+  margin-bottom:15px;
+}
+
+.report-info p { color:var(--gray); }
+
+.report-info ul {
+  list-style:none;
+  margin-top:25px;
+}
+
+.report-info li {
+  margin:14px 0;
+  font-weight:600;
+}
+
+.report-form {
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+
+.form-group { margin-bottom:17px; }
+
+.form-group label {
+  display:block;
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  outline:none;
+  background:#FBFDFC;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color:var(--emerald);
+}
+
+.form-group textarea {
+  resize:vertical;
+  min-height:100px;
+}
+
+.upload-box {
+  border:2px dashed var(--mint);
+  padding:22px;
+  border-radius:10px;
+  text-align:center;
+  cursor:pointer;
+  background:#F5FBF8;
+}
+
+.upload-box input { display:none; }
+
+#preview {
+  max-width:100%;
+  max-height:250px;
+  border-radius:10px;
+  margin-top:12px;
+  display:none;
+}
+
+.form-actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.form-actions button { flex:1; }
+
+.small-note {
+  font-size:12px;
+  color:var(--gray);
+  margin-top:12px;
+}
+
+.track-box {
+  max-width:650px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.track-box input {
+  width:100%;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  margin:15px 0;
+}
+
+.result {
+  margin-top:20px;
+  padding:18px;
+  background:var(--light);
+  border-radius:10px;
+  display:none;
+}
+
+.status {
+  display:inline-block;
+  padding:5px 12px;
+  background:#D7F3E8;
+  color:var(--green);
+  border-radius:20px;
+  font-weight:700;
+  font-size:12px;
+}
+
+.workflow {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.step {
+  padding:22px;
+  background:white;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+.step-number {
+  width:38px;
+  height:38px;
+  background:var(--green);
+  color:white;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+footer {
+  background:var(--dark);
+  color:white;
+  padding:45px 0 20px;
+}
+
+.footer-grid {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:30px;
+}
+
+footer p,footer a { color:#C8DDD4; font-size:14px; }
+
+footer a {
+  display:block;
+  text-decoration:none;
+  margin:8px 0;
+}
+
+footer h3 { margin-bottom:14px; }
+
+.copyright {
+  text-align:center;
+  border-top:1px solid #36564B;
+  padding-top:20px;
+  margin-top:30px;
+  color:#C8DDD4;
+  font-size:13px;
+}
+
+#toast {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--dark);
+  color:white;
+  padding:15px 20px;
+  border-radius:10px;
+  display:none;
+  z-index:200;
+  max-width:90%;
+}
+
+.menu-toggle {
+  display:none;
+  border:0;
+  background:var(--light);
+  padding:9px 12px;
+  border-radius:7px;
+  font-size:20px;
+}
+
+@media(max-width:800px) {
+  .hero-grid,.report-layout { grid-template-columns:1fr; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .dashboard-grid { grid-template-columns:1fr 1fr; }
+  .workflow { grid-template-columns:1fr 1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+
+  nav {
+    display:none;
+    position:absolute;
+    top:76px;
+    left:0;
+    right:0;
+    background:white;
+    padding:20px;
+    flex-direction:column;
+    align-items:flex-start;
+    box-shadow:var(--shadow);
+  }
+
+  nav.active { display:flex; }
+  .menu-toggle { display:block; }
+  .navbar > .btn { display:none; }
+}
+
+@media(max-width:500px) {
+  .stats,.dashboard-grid,.workflow,.footer-grid {
+    grid-template-columns:1fr;
+  }
+  section { padding:55px 0; }
+  .report-form { padding:20px; }
+}
 </style>
 </head>
+
 <body>
+
 <header>
-  <div class="container nav">
-    <a class="brand" href="#home" aria-label="CleanLoop home">
-      <span class="brandmark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 17.5c-3.7-5.5 2.8-11.1 8.4-7.6l9.4 6.1c4.3 2.8 1.8 9.2-3.2 9.2H10.5" stroke="white" stroke-width="2.7" stroke-linecap="round"/><path d="M10.5 25.2 6.8 21.5M10.5 25.2l3.7-3.7" stroke="white" stroke-width="2.7" stroke-linecap="round"/><path d="M18.5 7.4c.3-3 3.1-4.8 6.4-4.5-.2 3.4-2.1 5.9-5.6 6.2" fill="#a8f0ce"/></svg></span>
-      Clean<span>Loop</span>
+  <div class="container navbar">
+
+    <a href="#home" class="brand">
+      <svg class="logo" viewBox="0 0 100 120" aria-label="CleanLoop logo">
+        <path d="M48 17 C48 2 68 0 78 7 C76 23 64 33 48 30Z"
+              fill="#5DCAA5"/>
+        <rect x="17" y="38" width="66" height="9" rx="5"
+              fill="#1D9E75"/>
+        <rect x="39" y="29" width="23" height="10" rx="4"
+              fill="#1D9E75"/>
+        <path d="M25 51 L75 51 L67 109 L34 109Z"
+              fill="#0F6E56"/>
+        <path d="M50 68 A17 17 0 1 0 64 81"
+              fill="none" stroke="white"
+              stroke-width="7" stroke-linecap="round"/>
+      </svg>
+
+      <span>Clean<span>Loop</span></span>
     </a>
-    <nav class="navlinks" id="navlinks">
-      <a href="#platform">Platform</a><a href="#features">Features</a><a href="#workflow">How it works</a><a href="#roles">Users</a><a href="#contact">Contact</a>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <nav id="navigation">
+      <a href="#home">Home</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#report">Report Waste</a>
+      <a href="#track">Track Complaint</a>
+      <a href="#process">How It Works</a>
     </nav>
-    <a class="btn" href="#contact">Request a demo <span aria-hidden="true">→</span></a>
-    <button class="menu" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+
+    <a href="#report" class="btn btn-primary">Report Now</a>
   </div>
 </header>
 
 <main>
+
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="container hero-grid">
+
     <div>
-      <div class="eyebrow"><span class="dot"></span> Smart municipal waste operations</div>
-      <h1>Cleaner places.<br><em>Smarter management.</em></h1>
-      <p class="hero-copy">CleanLoop brings dump area monitoring, field operations and citizen reporting into one connected platform—helping municipal teams see issues clearly and act with confidence.</p>
+      <div class="tag">Smart City • Clean Environment</div>
+
+      <h1>
+        Building a Cleaner
+        <span>Tomorrow</span>
+      </h1>
+
+      <p>
+        CleanLoop is a smart waste management and dump-area
+        monitoring platform connecting citizens, municipal
+        authorities and field teams for cleaner communities.
+      </p>
+
       <div class="hero-actions">
-        <a class="btn" href="#platform">Explore the platform <span aria-hidden="true">→</span></a>
-        <a class="btn secondary" href="#features">View key features</a>
+        <a href="#report" class="btn btn-primary">
+          Report a Dumping Area
+        </a>
+
+        <a href="#dashboard" class="btn btn-light">
+          Explore Dashboard
+        </a>
       </div>
-      <div class="trustline">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Built for municipal officers, field teams, operators and citizens
+    </div>
+
+    <div class="hero-visual">
+      <div class="big-icon">♻️</div>
+      <h2>Keep Your City Clean</h2>
+      <p>Report • Monitor • Act • Verify</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATISTICS -->
+<div class="container">
+  <div class="stats">
+
+    <div class="stat-card">
+      <h3 id="totalReports">0</h3>
+      <p>Total Reports (Demo)</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="resolvedReports">0</h3>
+      <p>Resolved Reports (Demo)</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="pendingReports">0</h3>
+      <p>Pending Reports (Demo)</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>24/7</h3>
+      <p>Digital Reporting Access</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<section class="dashboard" id="dashboard">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="tag">CleanLoop Platform</div>
+      <h2>Smart Monitoring Dashboard</h2>
+      <p>One platform for citizens and municipal authorities.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <h3>Dump Area Monitoring</h3>
+        <p>Identify and monitor waste dumping locations
+           with location-based reports.</p>
       </div>
-    </div>
-    <div class="dashboard" aria-label="Illustrative CleanLoop dashboard preview">
-      <div class="dash-top"><div class="dash-title">CleanLoop · Operations overview</div><span class="live">● LIVE VIEW CONCEPT</span></div>
-      <div class="dash-grid">
-        <div class="metric"><small>Registered dump areas</small><strong>—</strong><div class="sub">Connected location records</div></div>
-        <div class="metric"><small>Open issues</small><strong>—</strong><div class="sub">Complaints & alerts</div></div>
-        <div class="metric"><small>Tasks in progress</small><strong>—</strong><div class="sub">Assigned field activity</div></div>
-        <div class="metric"><small>Verified collections</small><strong>—</strong><div class="sub">Recorded completion</div></div>
+
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <h3>Citizen Reporting</h3>
+        <p>Allow citizens to submit waste complaints
+           with photographs and location details.</p>
       </div>
-      <div class="map-card"><span class="map-label">Dump area map preview</span><i class="pin p1"></i><i class="pin p2"></i><i class="pin p3"></i></div>
-      <div class="map-legend"><span><i class="legend-dot" style="background:#1d9e75"></i>Clean / monitored</span><span><i class="legend-dot" style="background:#e59a28"></i>Attention</span><span><i class="legend-dot" style="background:#c94b43"></i>Urgent</span></div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="features">
-  <div class="container">
-    <div class="section-head"><div class="kicker">One connected system</div><h2>Everything needed to manage dump areas</h2><p>From location registration to verified action, CleanLoop gives teams a shared view of day-to-day waste management work.</p></div>
-    <div class="features">
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg></div><h3>Dump Area Registry</h3><p>Maintain a digital profile for every location, including ward, GPS coordinates, category, assigned team and inspection history.</p></article>
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3zM7 9h4M7 13h10M7 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Map-based Monitoring</h3><p>View registered locations on a map and filter by ward, condition, priority or last update to identify where attention is needed.</p></article>
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 8h14M5 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/></svg></div><h3>Waste Condition Updates</h3><p>Record clean, partially filled, nearly full or overflowing conditions with timestamps, notes and photo evidence.</p></article>
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v12H7l-3 3V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Citizen Complaints</h3><p>Let citizens report local cleanliness issues, attach photographs and follow complaint progress through a reference number.</p></article>
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8M9 3h6v3H9zM6 6h12v15H6zM9 11h6M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Tasks & Inspections</h3><p>Assign work to field staff, set due dates, collect inspection evidence and ask supervisors to verify completion.</p></article>
-      <article class="feature"><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h17M8 15l4-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Reports & Insights</h3><p>Review operational trends, complaint ageing, inspection coverage and ward-level performance using consistent measures.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="section workflow" id="workflow">
-  <div class="container">
-    <div class="section-head"><div class="kicker" style="color:#8ee0bd">A clear operating cycle</div><h2>From issue to verified resolution</h2><p>A consistent workflow helps every report reach the right team and makes the outcome visible.</p></div>
-    <div class="steps">
-      <article class="step"><div class="step-num">STEP 01</div><h3>Identify</h3><p>A dump area is inspected or a citizen reports a cleanliness issue with a location and supporting details.</p></article>
-      <article class="step"><div class="step-num">STEP 02</div><h3>Assign</h3><p>An authorized officer reviews the issue and assigns a task to the relevant supervisor or field team.</p></article>
-      <article class="step"><div class="step-num">STEP 03</div><h3>Resolve</h3><p>Field staff complete the work and submit notes, time and photo evidence through the mobile app.</p></article>
-      <article class="step"><div class="step-num">STEP 04</div><h3>Verify</h3><p>A supervisor checks the submitted evidence and confirms completion or returns the task for action.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="roles">
-  <div class="container">
-    <div class="section-head"><div class="kicker">Designed for every stakeholder</div><h2>The right experience for each user</h2><p>Role-based access keeps workflows focused while connecting all participants to the same operational record.</p></div>
-    <div class="roles">
-      <article class="role"><div class="icon">⌘</div><div><h3>Super Administrator</h3><p>System configuration, user access and municipal setup.</p></div></article>
-      <article class="role"><div class="icon">▤</div><div><h3>Municipal Officer</h3><p>Monitor zones, review performance and assign work.</p></div></article>
-      <article class="role"><div class="icon">◎</div><div><h3>Area Supervisor</h3><p>Coordinate teams, inspect locations and verify tasks.</p></div></article>
-      <article class="role"><div class="icon">♧</div><div><h3>Field Staff</h3><p>Update conditions, complete inspections and upload evidence.</p></div></article>
-      <article class="role"><div class="icon">▰</div><div><h3>Vehicle Operators</h3><p>View assigned collection jobs and record completion.</p></div></article>
-      <article class="role"><div class="icon">♡</div><div><h3>Citizens</h3><p>Report issues and track their own complaints.</p></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="platform" style="background:#eff8f3">
-  <div class="container">
-    <div class="section-head"><div class="kicker">Web + mobile</div><h2>One platform. Connected teams.</h2><p>CleanLoop brings administrative control and on-ground action together through shared data and role-based experiences.</p></div>
-    <div class="platform">
-      <article class="platform-card">
-        <div class="platform-visual"><div class="tile">Overview<br><strong>Dashboard</strong></div><div class="tile">Dump Areas<br><strong>Map & Status</strong></div><div class="tile">Reports<br><strong>Insights</strong></div></div>
-        <h3>Web dashboard</h3><p>A central workspace for municipal administrators and officers.</p>
-        <ul><li>Municipality, ward and zone management</li><li>Dump area register and map view</li><li>Complaint and task administration</li><li>Reports, alerts and user permissions</li></ul>
-      </article>
-      <article class="platform-card">
-        <div class="platform-visual"><div class="tile">My Tasks<br><strong>Assigned work</strong></div><div class="tile">Inspection<br><strong>Photo + GPS</strong></div><div class="tile">Report<br><strong>Issue</strong></div></div>
-        <h3>Mobile application</h3><p>A simple, field-friendly experience for staff, operators and citizens.</p>
-        <ul><li>Location-aware inspections and updates</li><li>Photo uploads and task completion</li><li>Citizen complaint reporting and tracking</li><li>Notifications and offline draft support</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container cta-box"><div><h2>Let’s build cleaner communities.</h2><p>Explore how CleanLoop can support your municipal waste management operations.</p></div><a class="btn" href="#contact">Talk about a pilot <span aria-hidden="true">→</span></a></div>
-</section>
-
-<section class="section" id="contact">
-  <div class="container contact">
-    <div class="contact-info"><div class="kicker">Get in touch</div><h2 style="font-size:2.4rem;line-height:1.12;color:var(--deep);letter-spacing:-.04em">Start a CleanLoop conversation</h2><p>Interested in a municipal pilot, product walkthrough or project collaboration? Share your details and the team can follow up.</p><p><strong>CleanLoop</strong><br>Manage • Monitor • Keep It Clean</p><p class="form-note">This is a front-end demonstration form. Connect it to an approved email or backend service before publishing it for real enquiries.</p></div>
-    <form id="demoForm">
-      <div class="form-grid">
-        <div class="field"><label for="name">Full name</label><input id="name" name="name" required placeholder="Your name"></div>
-        <div class="field"><label for="org">Organization</label><input id="org" name="organization" placeholder="Municipal corporation / company"></div>
-        <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" required placeholder="name@example.com"></div>
-        <div class="field"><label for="role">Your role</label><select id="role" name="role"><option value="">Select a role</option><option>Municipal officer</option><option>Project / technology team</option><option>Contractor / operator</option><option>Citizen / community representative</option><option>Other</option></select></div>
-        <div class="field full"><label for="message">What would you like to discuss?</label><textarea id="message" name="message" placeholder="Tell us about your city, dump area monitoring needs or project goals."></textarea></div>
+      <div class="card">
+        <div class="card-icon">🏛️</div>
+        <h3>Government Dashboard</h3>
+        <p>Help municipal officers review complaints
+           and assign field teams.</p>
       </div>
-      <button class="btn" type="submit">Submit enquiry <span aria-hidden="true">→</span></button>
-      <div id="formMessage" role="status">Thank you. This demo form is working locally; connect a backend to receive enquiries.</div>
-      <p class="form-note">No information is sent to a server by this demo page.</p>
+
+      <div class="card">
+        <div class="card-icon">🚛</div>
+        <h3>Waste Collection</h3>
+        <p>Coordinate cleanup activities and
+           field-level waste collection.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Performance Analytics</h3>
+        <p>Monitor complaint trends, resolution
+           activity and department performance.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>Resolution Verification</h3>
+        <p>Record cleanup evidence and supervisor
+           verification before closure.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CITIZEN REPORT -->
+<section class="report-section" id="report">
+  <div class="container report-layout">
+
+    <div class="report-info">
+      <div class="tag">Citizen Participation</div>
+      <h2>Report an Illegal Dumping Area</h2>
+
+      <p>
+        See garbage dumped in your neighbourhood?
+        Help your municipality take action by reporting
+        the location with a photograph.
+      </p>
+
+      <ul>
+        <li>📸 Upload a photograph</li>
+        <li>📍 Capture GPS coordinates</li>
+        <li>📝 Describe the waste problem</li>
+        <li>🔎 Receive a demo complaint reference</li>
+        <li>✅ Track the cleanup workflow</li>
+      </ul>
+    </div>
+
+    <form class="report-form" id="reportForm">
+
+      <h2>Submit a Complaint</h2>
+      <p class="small-note">
+        Fields marked * are required.
+      </p>
+
+      <div class="form-group">
+        <label for="citizenName">Full Name *</label>
+        <input id="citizenName" required
+               placeholder="Enter your name">
+      </div>
+
+      <div class="form-group">
+        <label for="citizenPhone">Mobile Number</label>
+        <input id="citizenPhone" type="tel"
+               placeholder="Enter mobile number">
+      </div>
+
+      <div class="form-group">
+        <label for="wasteType">Waste Category *</label>
+        <select id="wasteType" required>
+          <option value="">Select category</option>
+          <option>Household Waste</option>
+          <option>Plastic Waste</option>
+          <option>Construction Waste</option>
+          <option>Industrial Waste</option>
+          <option>Biomedical Waste</option>
+          <option>Open Dumping</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Upload Waste Photograph *</label>
+
+        <label class="upload-box" for="wastePhoto">
+          📷 Click here to upload or capture a photograph
+          <input type="file" id="wastePhoto"
+                 accept="image/*" capture="environment"
+                 required>
+          <img id="preview" alt="Selected waste photograph">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address / Landmark *</label>
+        <input id="address" required
+               placeholder="Enter location or landmark">
+      </div>
+
+      <div class="form-group">
+        <label>GPS Coordinates</label>
+        <input id="gps" placeholder="GPS location not captured"
+               readonly>
+        <button type="button" class="btn btn-primary"
+                style="margin-top:10px"
+                onclick="getLocation()">
+          📍 Capture My Location
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Problem Description *</label>
+        <textarea id="description" required
+          placeholder="Describe the waste problem..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary"
+              style="width:100%">
+        Submit Complaint
+      </button>
+
+      <p class="small-note">
+        Demo only: this form does not send information
+        to a municipal corporation or upload photographs
+        to a server.
+      </p>
+
     </form>
   </div>
 </section>
+
+<!-- TRACK COMPLAINT -->
+<section id="track">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="tag">Complaint Tracking</div>
+      <h2>Track Your Complaint</h2>
+      <p>Enter your CleanLoop reference number.</p>
+    </div>
+
+    <div class="track-box">
+
+      <label for="trackingId"><b>Complaint Reference ID</b></label>
+
+      <input id="trackingId"
+             placeholder="Example: CL-123456">
+
+      <button class="btn btn-primary"
+              onclick="trackComplaint()">
+        Track Complaint
+      </button>
+
+      <div class="result" id="trackingResult"></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GOVERNMENT WORKFLOW -->
+<section id="process" class="dashboard">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="tag">Government Action System</div>
+      <h2>From Complaint to Cleanup</h2>
+      <p>A transparent workflow for waste management.</p>
+    </div>
+
+    <div class="workflow">
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Complaint Submitted</h3>
+        <p>Citizen uploads the photograph,
+           description and location.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Officer Review</h3>
+        <p>Municipal officer reviews the
+           complaint and assigns a team.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Cleanup Activity</h3>
+        <p>Field team visits the location
+           and carries out cleanup.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Verification</h3>
+        <p>Supervisor reviews after-cleanup
+           evidence and closes the complaint.</p>
+      </div>
+
+    </div>
+
+    <div class="section-heading" style="margin-top:50px">
+      <h2>Complaint Statuses</h2>
+      <p>
+        Submitted → Under Review → Assigned →
+        In Progress → Resolved → Verified
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+
+    <div class="section-heading">
+      <div class="tag">Get in Touch</div>
+      <h2>Let's Build Cleaner Cities Together</h2>
+      <p>Connect with CleanLoop for collaboration
+         and project information.</p>
+    </div>
+
+    <div class="track-box">
+      <form id="contactForm">
+
+        <div class="form-group">
+          <label for="contactName">Name</label>
+          <input id="contactName" required
+                 placeholder="Your name">
+        </div>
+
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input id="contactEmail" type="email"
+                 required placeholder="Your email">
+        </div>
+
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" required
+                    placeholder="Write your message"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Submit Message
+        </button>
+
+        <p class="small-note">
+          Demo form only. No message is sent or stored.
+        </p>
+
+      </form>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer><div class="container footer-row"><div><div class="footer-brand">Clean<span>Loop</span></div><div class="footer-small">Manage • Monitor • Keep It Clean</div></div><div class="footer-small">© <span id="year"></span> CleanLoop. Project concept and demonstration landing page.</div></div></footer>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>♻️ CleanLoop</h3>
+        <p>
+          Smart waste management, citizen participation
+          and municipal coordination for a cleaner
+          and healthier environment.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#report">Report Waste</a>
+        <a href="#track">Track Complaint</a>
+      </div>
+
+      <div>
+        <h3>Our Mission</h3>
+        <p>Report. Monitor. Clean. Sustain.</p>
+        <p>Building a cleaner tomorrow.</p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> CleanLoop.
+      All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
 <script>
-const menuBtn=document.getElementById('menuBtn'), nav=document.getElementById('navlinks');
-menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'×':'☰';});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰';}));
-document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('demoForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('formMessage').style.display='block';});
-</script>
-</body>
-</html>
+/*
+  CLEANLOOP FRONTEND DEMO
+
+  Data is stored only in this browser using localStorage.
+  This is NOT a real government complaint submission system.
+  A secure backend is required for production.
+*/
+
+const STORAGE_KEY = "cleanloop_demo_complaints";
+
+function getReports() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveReports(reports) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3500);
+}
+
+function toggleMenu() {
+  document.getElementById("navigation")
+    .classList.toggle("active");
+}
+
+document.querySelectorAll("#navigation a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navigation")
+      .classList.remove("active");
+  });
+});
+
+// Image preview
+document.getElementById
