@@ -1,966 +1,478 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0F6E56">
-<title>CleanLoop | Smart Waste Management</title>
-
-<style>
-:root {
-  --green:#0F6E56;
-  --emerald:#1D9E75;
-  --mint:#5DCAA5;
-  --dark:#12332B;
-  --light:#E8F5EF;
-  --white:#FFFFFF;
-  --gray:#64756E;
-  --border:#DCEAE3;
-  --shadow:0 8px 25px rgba(18,51,43,.08);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-html { scroll-behavior:smooth; }
-
-body {
-  font-family:Arial,Helvetica,sans-serif;
-  background:#F5FAF7;
-  color:var(--dark);
-  line-height:1.6;
-}
-
-button,input,textarea,select { font:inherit; }
-
-button { cursor:pointer; }
-
-.container {
-  width: min(1150px,92%);
-  margin:auto;
-}
-
-header {
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 12px rgba(0,0,0,.05);
-}
-
-.navbar {
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.brand {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:var(--dark);
-  font-size:27px;
-  font-weight:800;
-}
-
-.brand span span { color:var(--emerald); }
-
-.logo {
-  width:43px;
-  height:48px;
-}
-
-nav {
-  display:flex;
-  gap:25px;
-  align-items:center;
-}
-
-nav a {
-  text-decoration:none;
-  color:var(--dark);
-  font-weight:600;
-  font-size:14px;
-}
-
-nav a:hover { color:var(--emerald); }
-
-.btn {
-  border:0;
-  padding:12px 22px;
-  border-radius:8px;
-  font-weight:700;
-  text-decoration:none;
-  display:inline-block;
-  transition:.2s;
-}
-
-.btn-primary {
-  background:var(--green);
-  color:white;
-}
-
-.btn-primary:hover { background:var(--dark); }
-
-.btn-light {
-  background:white;
-  color:var(--green);
-}
-
-.hero {
-  padding:85px 0;
-  background:linear-gradient(120deg,#E8F5EF,#F8FCFA);
-}
-
-.hero-grid {
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:45px;
-  align-items:center;
-}
-
-.tag {
-  color:var(--green);
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.hero h1 {
-  font-size:clamp(38px,5vw,60px);
-  line-height:1.12;
-  margin:18px 0;
-  color:var(--dark);
-}
-
-.hero h1 span { color:var(--emerald); }
-
-.hero p {
-  color:var(--gray);
-  font-size:17px;
-  max-width:590px;
-  margin-bottom:28px;
-}
-
-.hero-actions {
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-.hero-visual {
-  background:var(--green);
-  border-radius:28px;
-  padding:45px 25px;
-  text-align:center;
-  color:white;
-  box-shadow:var(--shadow);
-}
-
-.hero-visual .big-icon {
-  font-size:115px;
-  line-height:1.5;
-}
-
-.hero-visual h2 { font-size:27px; }
-
-.hero-visual p { color:#D7F3E8; margin:10px auto 0; }
-
-section { padding:75px 0; }
-
-.section-heading {
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.section-heading h2 {
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-.section-heading p { color:var(--gray); }
-
-.stats {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-top:-35px;
-  position:relative;
-}
-
-.stat-card {
-  background:white;
-  border:1px solid var(--border);
-  padding:25px;
-  border-radius:14px;
-  box-shadow:var(--shadow);
-}
-
-.stat-card h3 {
-  color:var(--green);
-  font-size:32px;
-}
-
-.stat-card p { color:var(--gray); font-size:14px; }
-
-.dashboard {
-  background:white;
-}
-
-.dashboard-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.card {
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-}
-
-.card-icon {
-  font-size:32px;
-  margin-bottom:12px;
-}
-
-.card h3 { margin-bottom:8px; }
-
-.card p { color:var(--gray); font-size:14px; }
-
-.report-section {
-  background:var(--light);
-}
-
-.report-layout {
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-  gap:35px;
-  align-items:start;
-}
-
-.report-info h2 {
-  font-size:35px;
-  margin-bottom:15px;
-}
-
-.report-info p { color:var(--gray); }
-
-.report-info ul {
-  list-style:none;
-  margin-top:25px;
-}
-
-.report-info li {
-  margin:14px 0;
-  font-weight:600;
-}
-
-.report-form {
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:var(--shadow);
-}
-
-.form-group { margin-bottom:17px; }
-
-.form-group label {
-  display:block;
-  font-weight:700;
-  font-size:14px;
-  margin-bottom:7px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width:100%;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  outline:none;
-  background:#FBFDFC;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color:var(--emerald);
-}
-
-.form-group textarea {
-  resize:vertical;
-  min-height:100px;
-}
-
-.upload-box {
-  border:2px dashed var(--mint);
-  padding:22px;
-  border-radius:10px;
-  text-align:center;
-  cursor:pointer;
-  background:#F5FBF8;
-}
-
-.upload-box input { display:none; }
-
-#preview {
-  max-width:100%;
-  max-height:250px;
-  border-radius:10px;
-  margin-top:12px;
-  display:none;
-}
-
-.form-actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.form-actions button { flex:1; }
-
-.small-note {
-  font-size:12px;
-  color:var(--gray);
-  margin-top:12px;
-}
-
-.track-box {
-  max-width:650px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-}
-
-.track-box input {
-  width:100%;
-  padding:14px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  margin:15px 0;
-}
-
-.result {
-  margin-top:20px;
-  padding:18px;
-  background:var(--light);
-  border-radius:10px;
-  display:none;
-}
-
-.status {
-  display:inline-block;
-  padding:5px 12px;
-  background:#D7F3E8;
-  color:var(--green);
-  border-radius:20px;
-  font-weight:700;
-  font-size:12px;
-}
-
-.workflow {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.step {
-  padding:22px;
-  background:white;
-  border-radius:12px;
-  border:1px solid var(--border);
-}
-
-.step-number {
-  width:38px;
-  height:38px;
-  background:var(--green);
-  color:white;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-weight:700;
-  margin-bottom:15px;
-}
-
-footer {
-  background:var(--dark);
-  color:white;
-  padding:45px 0 20px;
-}
-
-.footer-grid {
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:30px;
-}
-
-footer p,footer a { color:#C8DDD4; font-size:14px; }
-
-footer a {
-  display:block;
-  text-decoration:none;
-  margin:8px 0;
-}
-
-footer h3 { margin-bottom:14px; }
-
-.copyright {
-  text-align:center;
-  border-top:1px solid #36564B;
-  padding-top:20px;
-  margin-top:30px;
-  color:#C8DDD4;
-  font-size:13px;
-}
-
-#toast {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--dark);
-  color:white;
-  padding:15px 20px;
-  border-radius:10px;
-  display:none;
-  z-index:200;
-  max-width:90%;
-}
-
-.menu-toggle {
-  display:none;
-  border:0;
-  background:var(--light);
-  padding:9px 12px;
-  border-radius:7px;
-  font-size:20px;
-}
-
-@media(max-width:800px) {
-  .hero-grid,.report-layout { grid-template-columns:1fr; }
-  .stats { grid-template-columns:repeat(2,1fr); }
-  .dashboard-grid { grid-template-columns:1fr 1fr; }
-  .workflow { grid-template-columns:1fr 1fr; }
-  .footer-grid { grid-template-columns:1fr 1fr; }
-
-  nav {
-    display:none;
-    position:absolute;
-    top:76px;
-    left:0;
-    right:0;
-    background:white;
-    padding:20px;
-    flex-direction:column;
-    align-items:flex-start;
-    box-shadow:var(--shadow);
-  }
-
-  nav.active { display:flex; }
-  .menu-toggle { display:block; }
-  .navbar > .btn { display:none; }
-}
-
-@media(max-width:500px) {
-  .stats,.dashboard-grid,.workflow,.footer-grid {
-    grid-template-columns:1fr;
-  }
-  section { padding:55px 0; }
-  .report-form { padding:20px; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0F6E56" />
+  <title>CleanLoop | Smart Waste Management</title>
+
+  <!-- Inline PWA Manifest for Home Screen Installation -->
+  <link
+    rel="manifest"
+    href='data:application/manifest+json,{"name":"CleanLoop Smart Waste Management","short_name":"CleanLoop","start_url":".","display":"standalone","background_color":"#F5FAF7","theme_color":"#0F6E56","description":"Reduce • Segregate • Recycle - Smart Waste Management"}'
+  />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Configure CleanLoop theme tokens and typography for Tailwind CSS
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Arial', 'Helvetica', 'sans-serif'],
+          },
+          colors: {
+            greenLoop: '#0F6E56',
+            emeraldLoop: '#1D9E75',
+            mintLoop: '#5DCAA5',
+            darkLoop: '#12332B',
+            lightLoop: '#E8F5EF',
+            surfaceLoop: '#F5FAF7',
+            grayLoop: '#64756E',
+            borderLoop: '#DCEAE3',
+          },
+          boxShadow: {
+            loop: '0 8px 25px rgba(18, 51, 43, 0.08)',
+            loopElevated: '0 18px 42px rgba(15, 110, 86, 0.16)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --green: #0F6E56;
+      --emerald: #1D9E75;
+      --mint: #5DCAA5;
+      --dark: #12332B;
+      --light: #E8F5EF;
+      --white: #FFFFFF;
+      --gray: #64756E;
+      --border: #DCEAE3;
+      --shadow: 0 8px 25px rgba(18, 51, 43, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      background-color: #F5FAF7;
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* Staggered Reveal Animations */
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal-anim {
+      opacity: 0;
+      animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+
+    /* Interactive Card Hover & Tactile Button Feedback */
+    .loop-card {
+      box-shadow: var(--shadow);
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.24s ease;
+    }
+
+    .loop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 110, 86, 0.14);
+      border-color: var(--mint);
+    }
+
+    .btn-tactile {
+      transition: transform 0.14s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-tactile:active {
+      transform: scale(0.97);
+    }
+
+    /* 3D Auto-Flipping Civic Awareness Banner Styles */
+    .awareness-perspective {
+      perspective: 1300px;
+    }
+
+    @keyframes awareness3DFlip {
+      0% {
+        opacity: 0;
+        transform: rotateX(-22deg) rotateY(10deg) scale(0.96) translateY(12px);
+      }
+      55% {
+        opacity: 1;
+        transform: rotateX(3deg) rotateY(-2deg) scale(1.005) translateY(-2px);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
+      }
+    }
+
+    .awareness-flip-enter {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      animation: awareness3DFlip 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes progressFill {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    .awareness-progress-anim {
+      animation: progressFill 4.5s linear forwards;
+    }
+
+    .awareness-paused {
+      animation-play-state: paused !important;
+    }
+
+    /* Toast Notification */
+    @keyframes toastPop {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .toast-visible {
+      display: flex !important;
+      animation: toastPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Animated Gradient & Floating Orbs for Full-Screen Login / Signup Gate */
+    @keyframes ecoGradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animated-gate-bg {
+      background: linear-gradient(-45deg, #0B4F3E, #0F6E56, #1D9E75, #12332B);
+      background-size: 300% 300%;
+      animation: ecoGradientFlow 14s ease infinite;
+    }
+
+    @keyframes orbFloatA {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(20px, -22px, 0) scale(1.06); }
+    }
+
+    @keyframes orbFloatB {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-24px, 18px, 0) scale(0.95); }
+    }
+
+    .gate-orb-1 { animation: orbFloatA 9s ease-in-out infinite; }
+    .gate-orb-2 { animation: orbFloatB 11s ease-in-out infinite; }
+  </style>
 </head>
 
-<body>
-
-<header>
-  <div class="container navbar">
-
-    <a href="#home" class="brand">
-      <svg class="logo" viewBox="0 0 100 120" aria-label="CleanLoop logo">
-        <path d="M48 17 C48 2 68 0 78 7 C76 23 64 33 48 30Z"
-              fill="#5DCAA5"/>
-        <rect x="17" y="38" width="66" height="9" rx="5"
-              fill="#1D9E75"/>
-        <rect x="39" y="29" width="23" height="10" rx="4"
-              fill="#1D9E75"/>
-        <path d="M25 51 L75 51 L67 109 L34 109Z"
-              fill="#0F6E56"/>
-        <path d="M50 68 A17 17 0 1 0 64 81"
-              fill="none" stroke="white"
-              stroke-width="7" stroke-linecap="round"/>
-      </svg>
-
-      <span>Clean<span>Loop</span></span>
-    </a>
-
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-    <nav id="navigation">
-      <a href="#home">Home</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#report">Report Waste</a>
-      <a href="#track">Track Complaint</a>
-      <a href="#process">How It Works</a>
-    </nav>
-
-    <a href="#report" class="btn btn-primary">Report Now</a>
-  </div>
-</header>
-
-<main>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container hero-grid">
-
-    <div>
-      <div class="tag">Smart City • Clean Environment</div>
-
-      <h1>
-        Building a Cleaner
-        <span>Tomorrow</span>
-      </h1>
-
-      <p>
-        CleanLoop is a smart waste management and dump-area
-        monitoring platform connecting citizens, municipal
-        authorities and field teams for cleaner communities.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#report" class="btn btn-primary">
-          Report a Dumping Area
-        </a>
-
-        <a href="#dashboard" class="btn btn-light">
-          Explore Dashboard
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="big-icon">♻️</div>
-      <h2>Keep Your City Clean</h2>
-      <p>Report • Monitor • Act • Verify</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- STATISTICS -->
-<div class="container">
-  <div class="stats">
-
-    <div class="stat-card">
-      <h3 id="totalReports">0</h3>
-      <p>Total Reports (Demo)</p>
-    </div>
-
-    <div class="stat-card">
-      <h3 id="resolvedReports">0</h3>
-      <p>Resolved Reports (Demo)</p>
-    </div>
-
-    <div class="stat-card">
-      <h3 id="pendingReports">0</h3>
-      <p>Pending Reports (Demo)</p>
-    </div>
-
-    <div class="stat-card">
-      <h3>24/7</h3>
-      <p>Digital Reporting Access</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<section class="dashboard" id="dashboard">
-  <div class="container">
-
-    <div class="section-heading">
-      <div class="tag">CleanLoop Platform</div>
-      <h2>Smart Monitoring Dashboard</h2>
-      <p>One platform for citizens and municipal authorities.</p>
-    </div>
-
-    <div class="dashboard-grid">
-
-      <div class="card">
-        <div class="card-icon">📍</div>
-        <h3>Dump Area Monitoring</h3>
-        <p>Identify and monitor waste dumping locations
-           with location-based reports.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">📸</div>
-        <h3>Citizen Reporting</h3>
-        <p>Allow citizens to submit waste complaints
-           with photographs and location details.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🏛️</div>
-        <h3>Government Dashboard</h3>
-        <p>Help municipal officers review complaints
-           and assign field teams.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🚛</div>
-        <h3>Waste Collection</h3>
-        <p>Coordinate cleanup activities and
-           field-level waste collection.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h3>Performance Analytics</h3>
-        <p>Monitor complaint trends, resolution
-           activity and department performance.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">✅</div>
-        <h3>Resolution Verification</h3>
-        <p>Record cleanup evidence and supervisor
-           verification before closure.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CITIZEN REPORT -->
-<section class="report-section" id="report">
-  <div class="container report-layout">
-
-    <div class="report-info">
-      <div class="tag">Citizen Participation</div>
-      <h2>Report an Illegal Dumping Area</h2>
-
-      <p>
-        See garbage dumped in your neighbourhood?
-        Help your municipality take action by reporting
-        the location with a photograph.
-      </p>
-
-      <ul>
-        <li>📸 Upload a photograph</li>
-        <li>📍 Capture GPS coordinates</li>
-        <li>📝 Describe the waste problem</li>
-        <li>🔎 Receive a demo complaint reference</li>
-        <li>✅ Track the cleanup workflow</li>
-      </ul>
-    </div>
-
-    <form class="report-form" id="reportForm">
-
-      <h2>Submit a Complaint</h2>
-      <p class="small-note">
-        Fields marked * are required.
-      </p>
-
-      <div class="form-group">
-        <label for="citizenName">Full Name *</label>
-        <input id="citizenName" required
-               placeholder="Enter your name">
-      </div>
-
-      <div class="form-group">
-        <label for="citizenPhone">Mobile Number</label>
-        <input id="citizenPhone" type="tel"
-               placeholder="Enter mobile number">
-      </div>
-
-      <div class="form-group">
-        <label for="wasteType">Waste Category *</label>
-        <select id="wasteType" required>
-          <option value="">Select category</option>
-          <option>Household Waste</option>
-          <option>Plastic Waste</option>
-          <option>Construction Waste</option>
-          <option>Industrial Waste</option>
-          <option>Biomedical Waste</option>
-          <option>Open Dumping</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Upload Waste Photograph *</label>
-
-        <label class="upload-box" for="wastePhoto">
-          📷 Click here to upload or capture a photograph
-          <input type="file" id="wastePhoto"
-                 accept="image/*" capture="environment"
-                 required>
-          <img id="preview" alt="Selected waste photograph">
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label for="address">Address / Landmark *</label>
-        <input id="address" required
-               placeholder="Enter location or landmark">
-      </div>
-
-      <div class="form-group">
-        <label>GPS Coordinates</label>
-        <input id="gps" placeholder="GPS location not captured"
-               readonly>
-        <button type="button" class="btn btn-primary"
-                style="margin-top:10px"
-                onclick="getLocation()">
-          📍 Capture My Location
-        </button>
-      </div>
-
-      <div class="form-group">
-        <label for="description">Problem Description *</label>
-        <textarea id="description" required
-          placeholder="Describe the waste problem..."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary"
-              style="width:100%">
-        Submit Complaint
-      </button>
-
-      <p class="small-note">
-        Demo only: this form does not send information
-        to a municipal corporation or upload photographs
-        to a server.
-      </p>
-
-    </form>
-  </div>
-</section>
-
-<!-- TRACK COMPLAINT -->
-<section id="track">
-  <div class="container">
-
-    <div class="section-heading">
-      <div class="tag">Complaint Tracking</div>
-      <h2>Track Your Complaint</h2>
-      <p>Enter your CleanLoop reference number.</p>
-    </div>
-
-    <div class="track-box">
-
-      <label for="trackingId"><b>Complaint Reference ID</b></label>
-
-      <input id="trackingId"
-             placeholder="Example: CL-123456">
-
-      <button class="btn btn-primary"
-              onclick="trackComplaint()">
-        Track Complaint
-      </button>
-
-      <div class="result" id="trackingResult"></div>
-
-    </div>
-  </div>
-</section>
-
-<!-- GOVERNMENT WORKFLOW -->
-<section id="process" class="dashboard">
-  <div class="container">
-
-    <div class="section-heading">
-      <div class="tag">Government Action System</div>
-      <h2>From Complaint to Cleanup</h2>
-      <p>A transparent workflow for waste management.</p>
-    </div>
-
-    <div class="workflow">
-
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Complaint Submitted</h3>
-        <p>Citizen uploads the photograph,
-           description and location.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Officer Review</h3>
-        <p>Municipal officer reviews the
-           complaint and assigns a team.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Cleanup Activity</h3>
-        <p>Field team visits the location
-           and carries out cleanup.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">4</div>
-        <h3>Verification</h3>
-        <p>Supervisor reviews after-cleanup
-           evidence and closes the complaint.</p>
-      </div>
-
-    </div>
-
-    <div class="section-heading" style="margin-top:50px">
-      <h2>Complaint Statuses</h2>
-      <p>
-        Submitted → Under Review → Assigned →
-        In Progress → Resolved → Verified
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-
-    <div class="section-heading">
-      <div class="tag">Get in Touch</div>
-      <h2>Let's Build Cleaner Cities Together</h2>
-      <p>Connect with CleanLoop for collaboration
-         and project information.</p>
-    </div>
-
-    <div class="track-box">
-      <form id="contactForm">
-
-        <div class="form-group">
-          <label for="contactName">Name</label>
-          <input id="contactName" required
-                 placeholder="Your name">
+<body id="top" class="min-h-screen bg-surfaceLoop text-darkLoop antialiased">
+
+  <!-- =========================================================================
+       FULL-SCREEN ANIMATED LOGIN & CREATE CITIZEN ACCOUNT GATE (ON LOAD)
+       ========================================================================= -->
+  <div id="fullScreenAuthGate" class="min-h-screen w-full animated-gate-bg relative flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <!-- Floating Ambient Eco Orbs -->
+    <div class="gate-orb-1 pointer-events-none fixed -top-24 -left-24 w-80 h-80 rounded-full bg-mintLoop/20 blur-3xl"></div>
+    <div class="gate-orb-2 pointer-events-none fixed -bottom-28 -right-20 w-96 h-96 rounded-full bg-emeraldLoop/25 blur-3xl"></div>
+
+    <div class="w-full max-w-md relative z-10 my-auto reveal-anim">
+      <div class="bg-white/95 backdrop-blur-xl rounded-[28px] border border-white/60 shadow-2xl p-6 sm:p-8 space-y-5">
+
+        <!-- Horizontal CLEANLOOP Infinity-Leaf SVG Lockup -->
+        <div class="flex flex-col items-center text-center">
+          <svg
+            class="h-14 sm:h-16 w-auto max-w-full"
+            viewBox="0 0 430 116"
+            fill="none"
+            role="img"
+            aria-label="CLEANLOOP Reduce Segregate Recycle logo"
+          >
+            <defs>
+              <linearGradient id="gateRibbonLeft" x1="14" y1="30" x2="96" y2="86" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0A6B34" />
+                <stop offset="48%" stop-color="#179A4A" />
+                <stop offset="100%" stop-color="#6AC94C" />
+              </linearGradient>
+              <linearGradient id="gateRibbonRight" x1="94" y1="32" x2="174" y2="86" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#D7F3DF" />
+                <stop offset="52%" stop-color="#E7F8EC" />
+                <stop offset="100%" stop-color="#9BE0A8" />
+              </linearGradient>
+              <linearGradient id="gateRibbonCross" x1="78" y1="76" x2="148" y2="28" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#BCECC6" />
+                <stop offset="55%" stop-color="#DFF7E5" />
+                <stop offset="100%" stop-color="#F2FCF5" />
+              </linearGradient>
+              <linearGradient id="gateRibbonUnder" x1="68" y1="34" x2="138" y2="88" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0E8A44" />
+                <stop offset="55%" stop-color="#22A855" />
+                <stop offset="100%" stop-color="#98DFAA" />
+              </linearGradient>
+              <linearGradient id="gateLeafGrad" x1="16" y1="74" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#58B947" />
+                <stop offset="55%" stop-color="#6BC84B" />
+                <stop offset="100%" stop-color="#8AD957" />
+              </linearGradient>
+            </defs>
+
+            <g>
+              <path
+                d="M93 52 C110 31, 134 24, 152 33 C170 42, 173 67, 157 81 C141 95, 117 91, 99 71 L89 60 L98 51 L108 62 C121 77, 138 80, 149 70 C160 60, 158 44, 146 39 C134 33, 117 39, 102 58 Z"
+                fill="url(#gateRibbonRight)"
+                stroke="#145A32"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M95 54 C79 34, 57 25, 37 32 C17 39, 12 63, 25 79 C36 92, 57 94, 77 81 L71 72 C55 82, 39 80, 31 70 C23 59, 27 44, 41 39 C56 34, 72 42, 87 61 Z"
+                fill="url(#gateRibbonLeft)"
+                stroke="#145A32"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M74 44 C84 52, 95 65, 107 76 C118 85, 132 88, 144 83 L139 74 C129 77, 119 74, 110 66 C100 57, 90 45, 81 37 Z"
+                fill="url(#gateRibbonUnder)"
+                stroke="#145A32"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M65 74 C78 63, 91 49, 104 37 C115 28, 131 25, 145 30 L140 39 C129 35, 118 38, 109 46 C97 57, 85 70, 73 81 Z"
+                fill="url(#gateRibbonCross)"
+                stroke="#145A32"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 72 C29 79, 44 77, 59 71 C75 65, 92 67, 104 79 C91 76, 80 79, 68 85 C50 94, 27 91, 17 72 Z"
+                fill="url(#gateLeafGrad)"
+                stroke="#145A32"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M23 76 C41 83, 56 79, 71 74 C82 70, 91 72, 99 77"
+                stroke="#FFFFFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                fill="none"
+              />
+            </g>
+
+            <g transform="translate(182, 0)">
+              <text x="2.5" y="69.5" font-family="'Inter', 'Arial Black', system-ui, sans-serif" font-weight="900" font-size="37" letter-spacing="1.2" fill="#CFE8DA">CLEAN</text>
+              <text x="0" y="67" font-family="'Inter', 'Arial Black', system-ui, sans-serif" font-weight="900" font-size="37" letter-spacing="1.2">
+                <tspan fill="#12332B">CLEAN</tspan><tspan fill="#1D9E75">LOOP</tspan>
+              </text>
+              <text x="12" y="88" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="13.5" fill="#1D9E75">Reduce</text>
+              <text x="95" y="88" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="13.5" fill="#1D9E75">Segregate</text>
+              <text x="185" y="88" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="13.5" fill="#1D9E75">Recycle</text>
+            </g>
+          </svg>
+          <p class="mt-2 text-xs font-semibold text-grayLoop">
+            Smart Municipal Waste Reporting &amp; Civic Verification Portal
+          </p>
         </div>
 
-        <div class="form-group">
-          <label for="contactEmail">Email</label>
-          <input id="contactEmail" type="email"
-                 required placeholder="Your email">
+        <!-- Gate Mode Switcher: Sign In vs Create Citizen Account -->
+        <div class="grid grid-cols-2 gap-1.5 bg-lightLoop p-1.5 rounded-2xl border border-borderLoop">
+          <button
+            type="button"
+            id="gateTab-signin"
+            onclick="switchGateAuthMode('signin')"
+            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold bg-greenLoop text-white shadow-xs transition-all"
+          >
+            🔐 Sign In
+          </button>
+          <button
+            type="button"
+            id="gateTab-signup"
+            onclick="switchGateAuthMode('signup')"
+            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold text-darkLoop hover:bg-white/70 transition-all"
+          >
+            ✨ Create Citizen Account
+          </button>
         </div>
 
-        <div class="form-group">
-          <label for="contactMessage">Message</label>
-          <textarea id="contactMessage" required
-                    placeholder="Write your message"></textarea>
-        </div>
+        <!-- GATE FORM A: SIGN IN -->
+        <form id="gateSignInForm" class="space-y-4">
+          <div>
+            <label for="gateLoginId" class="block text-xs font-extrabold uppercase tracking-wider text-darkLoop mb-1">
+              Login User ID *
+            </label>
+            <input
+              id="gateLoginId"
+              type="text"
+              required
+              autocomplete="username"
+              placeholder="Enter User ID (admin or User)"
+              class="w-full px-4 py-3 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white"
+            />
+          </div>
 
-        <button type="submit" class="btn btn-primary">
-          Submit Message
-        </button>
+          <div>
+            <label for="gateLoginPass" class="block text-xs font-extrabold uppercase tracking-wider text-darkLoop mb-1">
+              Password *
+            </label>
+            <div class="relative">
+              <input
+                id="gateLoginPass"
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter password"
+                class="w-full pl-4 pr-14 py-3 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white"
+              />
+              <button
+                type="button"
+                onclick="togglePassField('gateLoginPass', this)"
+                class="absolute inset-y-0 right-3 flex items-center text-xs font-extrabold text-greenLoop"
+              >
+                Show
+              </button>
+            </div>
+          </div>
 
-        <p class="small-note">
-          Demo form only. No message is sent or stored.
-        </p>
+          <div id="gateSignInError" class="hidden rounded-xl bg-red-50 border border-red-200 px-3.5 py-2.5 text-xs font-bold text-red-700"></div>
 
-      </form>
-    </div>
-  </div>
-</section>
+          <button
+            type="submit"
+            class="btn-tactile w-full py-3.5 px-5 rounded-2xl bg-greenLoop hover:bg-darkLoop text-white text-sm font-extrabold shadow-loop"
+          >
+            Sign In to CleanLoop →
+          </button>
 
-</main>
+          <!-- 1-Click Credential Quick-Fill Chips -->
+          <div class="pt-3 border-t border-borderLoop space-y-2">
+            <p class="text-[11px] font-extrabold uppercase tracking-wider text-grayLoop text-center">
+              Quick-Fill Pre-Configured Accounts
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                type="button"
+                onclick="quickFillGate('User', 'user1234')"
+                class="btn-tactile flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lightLoop hover:bg-borderLoop border border-borderLoop text-left"
+              >
+                <div>
+                  <p class="text-xs font-extrabold text-darkLoop">📱 Citizen User</p>
+                  <p class="text-[11px] font-mono text-greenLoop">User / user1234</p>
+                </div>
+                <span class="text-xs font-extrabold text-emeraldLoop">Fill</span>
+              </button>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
+              <button
+                type="button"
+                onclick="quickFillGate('admin', 'admin123')"
+                class="btn-tactile flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lightLoop hover:bg-borderLoop border border-borderLoop text-left"
+              >
+                <div>
+                  <p class="text-xs font-extrabold text-darkLoop">🏛️ Govt Officer</p>
+                  <p class="text-[11px] font-mono text-greenLoop">admin / admin123</p>
+                </div>
+                <span class="text-xs font-extrabold text-emeraldLoop">Fill</span>
+              </button>
+            </div>
+          </div>
+        </form>
 
-    <div class="footer-grid">
+        <!-- GATE FORM B: CREATE CITIZEN ACCOUNT -->
+        <form id="gateSignUpForm" class="hidden space-y-3">
+          <div class="rounded-xl bg-lightLoop border border-mintLoop/50 px-3.5 py-2 flex items-center justify-between text-xs">
+            <span class="font-bold text-darkLoop">🎁 New Citizen Signup Bonus</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-greenLoop text-white font-extrabold">+50 Clean Coins</span>
+          </div>
 
-      <div>
-        <h3>♻️ CleanLoop</h3>
-        <p>
-          Smart waste management, citizen participation
-          and municipal coordination for a cleaner
-          and healthier environment.
-        </p>
-      </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="gateRegName" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Full Name *</label>
+              <input id="gateRegName" type="text" required placeholder="e.g., Sneha Patil" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
+            </div>
+            <div>
+              <label for="gateRegPhone" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Mobile Number *</label>
+              <input id="gateRegPhone" type="tel" required placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
+            </div>
+          </div>
 
-      <div>
-        <h3>Quick Links</h3>
-        <a href="#home">Home</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#report">Report Waste</a>
-        <a href="#track">Track Complaint</a>
-      </div>
+          <div>
+            <label for="gateRegWard" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Ward / Locality *</label>
+            <input id="gateRegWard" type="text" required placeholder="e.g., Ward 12, Shivajinagar, Pune" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
+          </div>
 
-      <div>
-        <h3>Our Mission</h3>
-        <p>Report. Monitor. Clean. Sustain.</p>
-        <p>Building a cleaner tomorrow.</p>
-      </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="gateRegId" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Choose Login ID *</label>
+              <input id="gateRegId" type="text" required placeholder="e.g., sneha26" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
+            </div>
+            <div>
+              <label for="gateRegPass" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Password *</label>
+              <div class="relative">
+                <input id="gateRegPass" type="password" required minlength="4" placeholder="Min 4 chars" class="w-full pl-3.5 pr-12 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
+                <button type="button" onclick="togglePassField('gateRegPass', this)" class="absolute inset-y-0 right-2.5 flex items-center text-[11px] font-extrabold text-greenLoop">Show</button>
+              </div>
+            </div>
+          </div>
 
-    </div>
+          <div id="gateSignUpError" class="hidden rounded-xl bg-red-50 border border-red-200 px-3.5 py-2.5 text-xs font-bold text-red-700"></div>
 
-    <div class="copyright">
-      © <span id="year"></span> CleanLoop.
-      All rights reserved.
-    </div>
+          <button
+            type="submit"
+            class="btn-tactile w-full py-3.5 px-5 rounded-2xl bg-emeraldLoop hover:bg-greenLoop text-white text-sm font-extrabold shadow-loop"
+          >
+            🌱 Create Citizen Account &amp; Enter Portal
+          </button>
+        </form>
 
-  </div>
-</footer>
-
-<div id="toast" role="status"></div>
-
-<script>
-/*
-  CLEANLOOP FRONTEND DEMO
-
-  Data is stored only in this browser using localStorage.
-  This is NOT a real government complaint submission system.
-  A secure backend is required for production.
-*/
-
-const STORAGE_KEY = "cleanloop_demo_complaints";
-
-function getReports() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveReports(reports) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 3500);
-}
-
-function toggleMenu() {
-  document.getElementById("navigation")
-    .classList.toggle("active");
-}
-
-document.querySelectorAll("#navigation a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.getElementById("navigation")
-      .classList.remove("active");
-  });
-});
-
-// Image preview
-document.getElementById
+        <!-- Secondary Bypass: Browse Public Landing Page Dir
