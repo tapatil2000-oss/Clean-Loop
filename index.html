@@ -3,14 +3,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#0F6E56" />
-  <title>CleanLoop | Smart Waste Management</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>CleanLoop | Reduce • Segregate • Recycle — Smart Waste Management PWA</title>
 
-  <!-- Inline PWA Manifest for Home Screen Installation -->
+  <!-- Inline PWA Web App Manifest for Home Screen Installation -->
   <link
     rel="manifest"
-    href='data:application/manifest+json,{"name":"CleanLoop Smart Waste Management","short_name":"CleanLoop","start_url":".","display":"standalone","background_color":"#F5FAF7","theme_color":"#0F6E56","description":"Reduce • Segregate • Recycle - Smart Waste Management"}'
+    href='data:application/manifest+json,{"name":"CleanLoop Smart Waste Management","short_name":"CleanLoop","start_url":".","display":"standalone","background_color":"#F5FAF7","theme_color":"#0F6E56","description":"Reduce • Segregate • Recycle - Smart Waste Management PWA"}'
   />
 
   <!-- Google Fonts: Inter -->
@@ -21,26 +23,27 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Configure CleanLoop theme tokens and typography for Tailwind CSS
+    // Configure CleanLoop exact design tokens for Tailwind CSS
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'Arial', 'Helvetica', 'sans-serif'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
           },
           colors: {
-            greenLoop: '#0F6E56',
+            forest: '#0F6E56',
             emeraldLoop: '#1D9E75',
             mintLoop: '#5DCAA5',
-            darkLoop: '#12332B',
-            lightLoop: '#E8F5EF',
-            surfaceLoop: '#F5FAF7',
-            grayLoop: '#64756E',
-            borderLoop: '#DCEAE3',
+            pineDark: '#12332B',
+            sageLight: '#E8F5EF',
+            sageSurface: '#F5FAF7',
+            sageBorder: '#DCEAE3',
+            sageMuted: '#5B6F67',
           },
           boxShadow: {
-            loop: '0 8px 25px rgba(18, 51, 43, 0.08)',
-            loopElevated: '0 18px 42px rgba(15, 110, 86, 0.16)',
+            glass: '0 24px 64px rgba(18, 51, 43, 0.16)',
+            cardSoft: '0 8px 26px rgba(18, 51, 43, 0.06)',
+            cardHover: '0 16px 36px rgba(15, 110, 86, 0.14)',
           },
         },
       },
@@ -49,22 +52,17 @@
 
   <style>
     :root {
-      --green: #0F6E56;
+      --forest: #0F6E56;
       --emerald: #1D9E75;
       --mint: #5DCAA5;
-      --dark: #12332B;
-      --light: #E8F5EF;
-      --white: #FFFFFF;
-      --gray: #64756E;
+      --pine: #12332B;
+      --surface: #F5FAF7;
       --border: #DCEAE3;
-      --shadow: 0 8px 25px rgba(18, 51, 43, 0.08);
     }
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
     }
 
     html {
@@ -72,108 +70,44 @@
     }
 
     body {
-      font-family: 'Inter', Arial, Helvetica, sans-serif;
-      background-color: #F5FAF7;
-      color: var(--dark);
-      line-height: 1.6;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--surface);
+      color: var(--pine);
       overflow-x: hidden;
     }
 
-    button, input, textarea, select {
-      font: inherit;
+    /* Animated Eco Gradient Surface */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    button {
-      cursor: pointer;
+    .animated-eco-bg {
+      background: linear-gradient(-45deg, #0B4F3E, #0F6E56, #1D9E75, #12332B);
+      background-size: 300% 300%;
+      animation: gradientShift 14s ease infinite;
     }
 
-    /* Staggered Reveal Animations */
-    @keyframes revealUp {
+    /* Floating Ambient Orbs */
+    @keyframes floatOrb {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(18px, -24px, 0) scale(1.06); }
+    }
+
+    @keyframes floatOrbReverse {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-22px, 20px, 0) scale(0.95); }
+    }
+
+    .orb-float-1 { animation: floatOrb 9s ease-in-out infinite; }
+    .orb-float-2 { animation: floatOrbReverse 11s ease-in-out infinite; }
+
+    /* Staggered Fade-Up Entrance */
+    @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .reveal-anim {
-      opacity: 0;
-      animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .delay-1 { animation-delay: 0.08s; }
-    .delay-2 { animation-delay: 0.16s; }
-    .delay-3 { animation-delay: 0.24s; }
-
-    /* Interactive Card Hover & Tactile Button Feedback */
-    .loop-card {
-      box-shadow: var(--shadow);
-      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.24s ease;
-    }
-
-    .loop-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(15, 110, 86, 0.14);
-      border-color: var(--mint);
-    }
-
-    .btn-tactile {
-      transition: transform 0.14s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-tactile:active {
-      transform: scale(0.97);
-    }
-
-    /* 3D Auto-Flipping Civic Awareness Banner Styles */
-    .awareness-perspective {
-      perspective: 1300px;
-    }
-
-    @keyframes awareness3DFlip {
-      0% {
-        opacity: 0;
-        transform: rotateX(-22deg) rotateY(10deg) scale(0.96) translateY(12px);
-      }
-      55% {
-        opacity: 1;
-        transform: rotateX(3deg) rotateY(-2deg) scale(1.005) translateY(-2px);
-      }
-      100% {
-        opacity: 1;
-        transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
-      }
-    }
-
-    .awareness-flip-enter {
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      animation: awareness3DFlip 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes progressFill {
-      from { width: 0%; }
-      to { width: 100%; }
-    }
-
-    .awareness-progress-anim {
-      animation: progressFill 4.5s linear forwards;
-    }
-
-    .awareness-paused {
-      animation-play-state: paused !important;
-    }
-
-    /* Toast Notification */
-    @keyframes toastPop {
-      from {
-        opacity: 0;
-        transform: translateY(16px) scale(0.96);
+        transform: translateY(16px) scale(0.985);
       }
       to {
         opacity: 1;
@@ -181,86 +115,166 @@
       }
     }
 
-    .toast-visible {
+    .animate-fade-up {
+      opacity: 0;
+      animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.06s; }
+    .delay-2 { animation-delay: 0.12s; }
+    .delay-3 { animation-delay: 0.18s; }
+    .delay-4 { animation-delay: 0.24s; }
+
+    /* Interactive Card Lift & Tactile Button Press */
+    .card-interactive {
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.24s ease;
+    }
+
+    .card-interactive:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(15, 110, 86, 0.13);
+      border-color: var(--mint);
+    }
+
+    .btn-press {
+      transition: transform 0.14s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-press:active {
+      transform: scale(0.97);
+    }
+
+    .progress-track-fill {
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes scanBeam {
+      0% { top: 6%; opacity: 0.2; }
+      50% { top: 88%; opacity: 1; }
+      100% { top: 6%; opacity: 0.2; }
+    }
+
+    .scan-laser-line {
+      animation: scanBeam 2.2s ease-in-out infinite;
+    }
+
+    /* Toast Notification */
+    @keyframes toastSlideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 18px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+    }
+
+    .toast-active {
       display: flex !important;
-      animation: toastPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: toastSlideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Animated Gradient & Floating Orbs for Full-Screen Login / Signup Gate */
-    @keyframes ecoGradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* 3D Auto-Flipping Civic Awareness Banner Carousel */
+    .awareness-stage {
+      perspective: 1300px;
     }
 
-    .animated-gate-bg {
-      background: linear-gradient(-45deg, #0B4F3E, #0F6E56, #1D9E75, #12332B);
-      background-size: 300% 300%;
-      animation: ecoGradientFlow 14s ease infinite;
+    @keyframes awarenessFlipIn {
+      0% {
+        opacity: 0;
+        transform: rotateX(-22deg) rotateY(9deg) scale(0.96) translateY(14px);
+        filter: brightness(1.14);
+      }
+      55% {
+        opacity: 1;
+        transform: rotateX(3deg) rotateY(-2deg) scale(1.006) translateY(-2px);
+        filter: brightness(1.03);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
+        filter: brightness(1);
+      }
     }
 
-    @keyframes orbFloatA {
-      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(20px, -22px, 0) scale(1.06); }
+    .awareness-card-flip {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      animation: awarenessFlipIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    @keyframes orbFloatB {
-      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(-24px, 18px, 0) scale(0.95); }
+    @keyframes awarenessShineSweep {
+      0% { transform: translateX(-120%) skewX(-22deg); opacity: 0; }
+      35% { opacity: 0.28; }
+      100% { transform: translateX(240%) skewX(-22deg); opacity: 0; }
     }
 
-    .gate-orb-1 { animation: orbFloatA 9s ease-in-out infinite; }
-    .gate-orb-2 { animation: orbFloatB 11s ease-in-out infinite; }
+    .awareness-shine {
+      animation: awarenessShineSweep 0.95s ease-out forwards;
+    }
+
+    @keyframes bannerCountdown {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    .awareness-timer-bar {
+      animation: bannerCountdown 4.5s linear forwards;
+    }
+
+    .awareness-timer-paused {
+      animation-play-state: paused !important;
+    }
   </style>
 </head>
 
-<body id="top" class="min-h-screen bg-surfaceLoop text-darkLoop antialiased">
+<body class="min-h-screen bg-sageSurface text-pineDark antialiased">
 
   <!-- =========================================================================
-       FULL-SCREEN ANIMATED LOGIN & CREATE CITIZEN ACCOUNT GATE (ON LOAD)
+       VIEW 1: PUBLIC LANDING PAGE (DEFAULT ENTRY EXPERIENCE)
        ========================================================================= -->
-  <div id="fullScreenAuthGate" class="min-h-screen w-full animated-gate-bg relative flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-    <!-- Floating Ambient Eco Orbs -->
-    <div class="gate-orb-1 pointer-events-none fixed -top-24 -left-24 w-80 h-80 rounded-full bg-mintLoop/20 blur-3xl"></div>
-    <div class="gate-orb-2 pointer-events-none fixed -bottom-28 -right-20 w-96 h-96 rounded-full bg-emeraldLoop/25 blur-3xl"></div>
+  <div id="landingPageScreen" class="min-h-screen flex flex-col bg-sageSurface">
 
-    <div class="w-full max-w-md relative z-10 my-auto reveal-anim">
-      <div class="bg-white/95 backdrop-blur-xl rounded-[28px] border border-white/60 shadow-2xl p-6 sm:p-8 space-y-5">
-
-        <!-- Horizontal CLEANLOOP Infinity-Leaf SVG Lockup -->
-        <div class="flex flex-col items-center text-center">
+    <!-- Sticky Glass Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-sageBorder shadow-xs">
+      <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[74px] flex items-center justify-between gap-3">
+        <!-- Custom CleanLoop Infinity-Leaf SVG Lockup -->
+        <a href="#landingTop" class="flex items-center focus:outline-none rounded-xl py-1 shrink-0" aria-label="CleanLoop Home">
           <svg
-            class="h-14 sm:h-16 w-auto max-w-full"
+            class="h-10 sm:h-12 w-auto"
             viewBox="0 0 430 116"
             fill="none"
             role="img"
             aria-label="CLEANLOOP Reduce Segregate Recycle logo"
           >
             <defs>
-              <linearGradient id="gateRibbonLeft" x1="14" y1="30" x2="96" y2="86" gradientUnits="userSpaceOnUse">
+              <linearGradient id="landNavRibbonLeft" x1="14" y1="30" x2="96" y2="86" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#0A6B34" />
                 <stop offset="48%" stop-color="#179A4A" />
                 <stop offset="100%" stop-color="#6AC94C" />
               </linearGradient>
-              <linearGradient id="gateRibbonRight" x1="94" y1="32" x2="174" y2="86" gradientUnits="userSpaceOnUse">
+              <linearGradient id="landNavRibbonRight" x1="94" y1="32" x2="174" y2="86" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#D7F3DF" />
                 <stop offset="52%" stop-color="#E7F8EC" />
                 <stop offset="100%" stop-color="#9BE0A8" />
               </linearGradient>
-              <linearGradient id="gateRibbonCross" x1="78" y1="76" x2="148" y2="28" gradientUnits="userSpaceOnUse">
+              <linearGradient id="landNavRibbonCross" x1="78" y1="76" x2="148" y2="28" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#BCECC6" />
                 <stop offset="55%" stop-color="#DFF7E5" />
                 <stop offset="100%" stop-color="#F2FCF5" />
               </linearGradient>
-              <linearGradient id="gateRibbonUnder" x1="68" y1="34" x2="138" y2="88" gradientUnits="userSpaceOnUse">
+              <linearGradient id="landNavRibbonUnder" x1="68" y1="34" x2="138" y2="88" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#0E8A44" />
                 <stop offset="55%" stop-color="#22A855" />
                 <stop offset="100%" stop-color="#98DFAA" />
               </linearGradient>
-              <linearGradient id="gateLeafGrad" x1="16" y1="74" x2="104" y2="82" gradientUnits="userSpaceOnUse">
+              <linearGradient id="landNavLeafGrad" x1="16" y1="74" x2="104" y2="82" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#58B947" />
                 <stop offset="55%" stop-color="#6BC84B" />
                 <stop offset="100%" stop-color="#8AD957" />
@@ -270,35 +284,35 @@
             <g>
               <path
                 d="M93 52 C110 31, 134 24, 152 33 C170 42, 173 67, 157 81 C141 95, 117 91, 99 71 L89 60 L98 51 L108 62 C121 77, 138 80, 149 70 C160 60, 158 44, 146 39 C134 33, 117 39, 102 58 Z"
-                fill="url(#gateRibbonRight)"
+                fill="url(#landNavRibbonRight)"
                 stroke="#145A32"
                 stroke-width="1.6"
                 stroke-linejoin="round"
               />
               <path
                 d="M95 54 C79 34, 57 25, 37 32 C17 39, 12 63, 25 79 C36 92, 57 94, 77 81 L71 72 C55 82, 39 80, 31 70 C23 59, 27 44, 41 39 C56 34, 72 42, 87 61 Z"
-                fill="url(#gateRibbonLeft)"
+                fill="url(#landNavRibbonLeft)"
                 stroke="#145A32"
                 stroke-width="1.6"
                 stroke-linejoin="round"
               />
               <path
                 d="M74 44 C84 52, 95 65, 107 76 C118 85, 132 88, 144 83 L139 74 C129 77, 119 74, 110 66 C100 57, 90 45, 81 37 Z"
-                fill="url(#gateRibbonUnder)"
+                fill="url(#landNavRibbonUnder)"
                 stroke="#145A32"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               />
               <path
                 d="M65 74 C78 63, 91 49, 104 37 C115 28, 131 25, 145 30 L140 39 C129 35, 118 38, 109 46 C97 57, 85 70, 73 81 Z"
-                fill="url(#gateRibbonCross)"
+                fill="url(#landNavRibbonCross)"
                 stroke="#145A32"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               />
               <path
                 d="M17 72 C29 79, 44 77, 59 71 C75 65, 92 67, 104 79 C91 76, 80 79, 68 85 C50 94, 27 91, 17 72 Z"
-                fill="url(#gateLeafGrad)"
+                fill="url(#landNavLeafGrad)"
                 stroke="#145A32"
                 stroke-width="1.6"
                 stroke-linejoin="round"
@@ -313,8 +327,23 @@
             </g>
 
             <g transform="translate(182, 0)">
-              <text x="2.5" y="69.5" font-family="'Inter', 'Arial Black', system-ui, sans-serif" font-weight="900" font-size="37" letter-spacing="1.2" fill="#CFE8DA">CLEAN</text>
-              <text x="0" y="67" font-family="'Inter', 'Arial Black', system-ui, sans-serif" font-weight="900" font-size="37" letter-spacing="1.2">
+              <text
+                x="2.5"
+                y="69.5"
+                font-family="'Inter', 'Arial Black', system-ui, sans-serif"
+                font-weight="900"
+                font-size="37"
+                letter-spacing="1.2"
+                fill="#CFE8DA"
+              >CLEAN</text>
+              <text
+                x="0"
+                y="67"
+                font-family="'Inter', 'Arial Black', system-ui, sans-serif"
+                font-weight="900"
+                font-size="37"
+                letter-spacing="1.2"
+              >
                 <tspan fill="#12332B">CLEAN</tspan><tspan fill="#1D9E75">LOOP</tspan>
               </text>
               <text x="12" y="88" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="13.5" fill="#1D9E75">Reduce</text>
@@ -322,157 +351,134 @@
               <text x="185" y="88" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="13.5" fill="#1D9E75">Recycle</text>
             </g>
           </svg>
-          <p class="mt-2 text-xs font-semibold text-grayLoop">
-            Smart Municipal Waste Reporting &amp; Civic Verification Portal
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-6 text-xs font-extrabold text-pineDark">
+          <a href="#howItWorksSection" class="hover:text-forest transition-colors">How It Works</a>
+          <a href="#featuresShowcaseSection" class="hover:text-forest transition-colors">Platform Features</a>
+          <a href="#impactSlaSection" class="hover:text-forest transition-colors">Impact &amp; SLA</a>
+          <a href="#civicReelSection" class="hover:text-forest transition-colors">Civic Reel</a>
+        </nav>
+
+        <!-- Header Action Buttons -->
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <button
+            type="button"
+            onclick="openAuthGate('login', 'admin', 'admin123')"
+            class="hidden md:inline-flex btn-press px-3.5 py-2.5 rounded-xl bg-sageLight hover:bg-sageBorder/80 border border-sageBorder text-forest text-xs font-extrabold"
+          >
+            Officer Login
+          </button>
+          <button
+            type="button"
+            onclick="openAuthGate('login')"
+            class="btn-press px-3.5 sm:px-4 py-2.5 rounded-xl bg-white hover:bg-sageLight border border-sageBorder text-pineDark text-xs font-extrabold"
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            onclick="launchInstantDemo('citizen')"
+            class="btn-press px-3.5 sm:px-4 py-2.5 rounded-xl bg-forest hover:bg-pineDark text-white text-xs font-extrabold shadow-cardSoft"
+          >
+            Report a Dump →
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =======================================================================
+         HERO SECTION (ANIMATED ECO GRADIENT + LIVE COMPLAINT PREVIEW CARD)
+         ======================================================================= -->
+    <section id="landingTop" class="relative overflow-hidden animated-eco-bg text-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+      <!-- Ambient Floating Orbs -->
+      <div class="orb-float-1 pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-mintLoop/20 blur-3xl"></div>
+      <div class="orb-float-2 pointer-events-none absolute -bottom-28 -right-20 w-[28rem] h-[28rem] rounded-full bg-emeraldLoop/25 blur-3xl"></div>
+
+      <div class="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+        <!-- Left Column: Headline, Value Proposition & CTAs -->
+        <div class="lg:col-span-7 space-y-5 animate-fade-up">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-md text-xs font-extrabold text-mintLoop">
+            <span class="w-2 h-2 rounded-full bg-mintLoop animate-pulse"></span>
+            <span>Smart Municipal Waste Reporting &amp; Verification PWA</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-[3.35rem] font-black tracking-tight leading-[1.08]">
+            Turn Unattended Dump Spots Into <span class="text-mintLoop">Verified Clean Streets</span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-sageLight/95 leading-relaxed max-w-2xl">
+            Snap geo-tagged photo evidence, run instant AI waste classification, and dispatch municipal cleanup crews under a strict <strong class="text-white">24-hour ward SLA</strong>. Track every complaint step-by-step with <strong class="text-mintLoop">Before &amp; After proof</strong> and earn <strong class="text-white">+50 Clean Coins</strong> per verified report.
           </p>
+
+          <!-- Primary & Secondary CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <button
+              type="button"
+              onclick="openAuthGate('login')"
+              class="btn-press px-6 py-3.5 rounded-2xl bg-white hover:bg-sageLight text-pineDark text-xs sm:text-sm font-extrabold shadow-glass flex items-center gap-2"
+            >
+              <span>Launch Citizen Portal / Sign In</span>
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="openAuthGate('register')"
+              class="btn-press px-5 py-3.5 rounded-2xl bg-emeraldLoop hover:bg-mintLoop hover:text-pineDark text-white border border-white/25 text-xs sm:text-sm font-extrabold shadow-cardSoft"
+            >
+              Create Free Account (+50 Coins)
+            </button>
+
+            <a
+              href="#featuresShowcaseSection"
+              class="btn-press px-4 py-3.5 rounded-2xl bg-pineDark/60 hover:bg-pineDark text-white border border-white/20 text-xs sm:text-sm font-bold"
+            >
+              Explore Features
+            </a>
+          </div>
+
+          <!-- Instant 1-Click Live Demo Bar -->
+          <div class="pt-3 flex flex-wrap items-center gap-2.5 text-xs text-sageLight/90">
+            <span class="font-bold text-mintLoop">Instant Live Demo:</span>
+            <button
+              type="button"
+              onclick="launchInstantDemo('citizen')"
+              class="btn-press px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 font-extrabold text-white"
+            >
+              Enter as Citizen (Aarav)
+            </button>
+            <button
+              type="button"
+              onclick="launchInstantDemo('officer')"
+              class="btn-press px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 font-extrabold text-white"
+            >
+              Enter as Govt Officer (IAS)
+            </button>
+          </div>
         </div>
 
-        <!-- Gate Mode Switcher: Sign In vs Create Citizen Account -->
-        <div class="grid grid-cols-2 gap-1.5 bg-lightLoop p-1.5 rounded-2xl border border-borderLoop">
-          <button
-            type="button"
-            id="gateTab-signin"
-            onclick="switchGateAuthMode('signin')"
-            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold bg-greenLoop text-white shadow-xs transition-all"
-          >
-            🔐 Sign In
-          </button>
-          <button
-            type="button"
-            id="gateTab-signup"
-            onclick="switchGateAuthMode('signup')"
-            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold text-darkLoop hover:bg-white/70 transition-all"
-          >
-            ✨ Create Citizen Account
-          </button>
-        </div>
-
-        <!-- GATE FORM A: SIGN IN -->
-        <form id="gateSignInForm" class="space-y-4">
-          <div>
-            <label for="gateLoginId" class="block text-xs font-extrabold uppercase tracking-wider text-darkLoop mb-1">
-              Login User ID *
-            </label>
-            <input
-              id="gateLoginId"
-              type="text"
-              required
-              autocomplete="username"
-              placeholder="Enter User ID (admin or User)"
-              class="w-full px-4 py-3 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white"
-            />
-          </div>
-
-          <div>
-            <label for="gateLoginPass" class="block text-xs font-extrabold uppercase tracking-wider text-darkLoop mb-1">
-              Password *
-            </label>
-            <div class="relative">
-              <input
-                id="gateLoginPass"
-                type="password"
-                required
-                autocomplete="current-password"
-                placeholder="Enter password"
-                class="w-full pl-4 pr-14 py-3 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white"
-              />
-              <button
-                type="button"
-                onclick="togglePassField('gateLoginPass', this)"
-                class="absolute inset-y-0 right-3 flex items-center text-xs font-extrabold text-greenLoop"
-              >
-                Show
-              </button>
-            </div>
-          </div>
-
-          <div id="gateSignInError" class="hidden rounded-xl bg-red-50 border border-red-200 px-3.5 py-2.5 text-xs font-bold text-red-700"></div>
-
-          <button
-            type="submit"
-            class="btn-tactile w-full py-3.5 px-5 rounded-2xl bg-greenLoop hover:bg-darkLoop text-white text-sm font-extrabold shadow-loop"
-          >
-            Sign In to CleanLoop →
-          </button>
-
-          <!-- 1-Click Credential Quick-Fill Chips -->
-          <div class="pt-3 border-t border-borderLoop space-y-2">
-            <p class="text-[11px] font-extrabold uppercase tracking-wider text-grayLoop text-center">
-              Quick-Fill Pre-Configured Accounts
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <button
-                type="button"
-                onclick="quickFillGate('User', 'user1234')"
-                class="btn-tactile flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lightLoop hover:bg-borderLoop border border-borderLoop text-left"
-              >
-                <div>
-                  <p class="text-xs font-extrabold text-darkLoop">📱 Citizen User</p>
-                  <p class="text-[11px] font-mono text-greenLoop">User / user1234</p>
-                </div>
-                <span class="text-xs font-extrabold text-emeraldLoop">Fill</span>
-              </button>
-
-              <button
-                type="button"
-                onclick="quickFillGate('admin', 'admin123')"
-                class="btn-tactile flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-lightLoop hover:bg-borderLoop border border-borderLoop text-left"
-              >
-                <div>
-                  <p class="text-xs font-extrabold text-darkLoop">🏛️ Govt Officer</p>
-                  <p class="text-[11px] font-mono text-greenLoop">admin / admin123</p>
-                </div>
-                <span class="text-xs font-extrabold text-emeraldLoop">Fill</span>
-              </button>
-            </div>
-          </div>
-        </form>
-
-        <!-- GATE FORM B: CREATE CITIZEN ACCOUNT -->
-        <form id="gateSignUpForm" class="hidden space-y-3">
-          <div class="rounded-xl bg-lightLoop border border-mintLoop/50 px-3.5 py-2 flex items-center justify-between text-xs">
-            <span class="font-bold text-darkLoop">🎁 New Citizen Signup Bonus</span>
-            <span class="px-2.5 py-0.5 rounded-full bg-greenLoop text-white font-extrabold">+50 Clean Coins</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label for="gateRegName" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Full Name *</label>
-              <input id="gateRegName" type="text" required placeholder="e.g., Sneha Patil" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
-            </div>
-            <div>
-              <label for="gateRegPhone" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Mobile Number *</label>
-              <input id="gateRegPhone" type="tel" required placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
-            </div>
-          </div>
-
-          <div>
-            <label for="gateRegWard" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Ward / Locality *</label>
-            <input id="gateRegWard" type="text" required placeholder="e.g., Ward 12, Shivajinagar, Pune" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label for="gateRegId" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Choose Login ID *</label>
-              <input id="gateRegId" type="text" required placeholder="e.g., sneha26" class="w-full px-3.5 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
-            </div>
-            <div>
-              <label for="gateRegPass" class="block text-[11px] font-extrabold uppercase text-darkLoop mb-1">Password *</label>
-              <div class="relative">
-                <input id="gateRegPass" type="password" required minlength="4" placeholder="Min 4 chars" class="w-full pl-3.5 pr-12 py-2.5 rounded-xl border border-borderLoop bg-surfaceLoop text-sm font-semibold text-darkLoop focus:outline-none focus:border-emeraldLoop focus:bg-white" />
-                <button type="button" onclick="togglePassField('gateRegPass', this)" class="absolute inset-y-0 right-2.5 flex items-center text-[11px] font-extrabold text-greenLoop">Show</button>
+        <!-- Right Column: Interactive Live Complaint Preview Card -->
+        <div class="lg:col-span-5 animate-fade-up delay-2">
+          <div class="bg-white/95 backdrop-blur-xl text-pineDark rounded-[28px] border border-white/70 shadow-glass p-5 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-sageBorder pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emeraldLoop animate-pulse"></span>
+                <span class="text-xs font-black uppercase tracking-wider text-forest">Live Ward Dispatch Preview</span>
               </div>
+              <span class="px-2.5 py-1 rounded-full bg-red-100 text-red-800 text-[10px] font-extrabold">CRITICAL • 6H SLA</span>
             </div>
-          </div>
 
-          <div id="gateSignUpError" class="hidden rounded-xl bg-red-50 border border-red-200 px-3.5 py-2.5 text-xs font-bold text-red-700"></div>
+            <!-- Simulated Live Ticket CL-482910 -->
+            <div class="rounded-2xl bg-sageSurface border border-sageBorder p-4 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-mono text-xs font-black text-forest bg-white px-2.5 py-1 rounded-lg border border-sageBorder">CL-482910</span>
+                <span id="heroPreviewStatusChip" class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-200 text-[11px] font-extrabold">Submitted</span>
+              </div>
 
-          <button
-            type="submit"
-            class="btn-tactile w-full py-3.5 px-5 rounded-2xl bg-emeraldLoop hover:bg-greenLoop text-white text-sm font-extrabold shadow-loop"
-          >
-            🌱 Create Citizen Account &amp; Enter Portal
-          </button>
-        </form>
-
-        <!-- Secondary Bypass: Browse Public Landing Page Dir
+              <div>
+                <h2 class="text-base font-extrabold text-pineDark">Ward 04, Near Kothrud Depot, Pune</h2>
+                <p class="text-[11px] font-mono text-sageMuted mt-0.5">GPS: 18.507398, 73.807650 • Plastic Waste</p>
+                <p class="text-xs text-pineDark/85 mt-1.5">AI Scan: Dry Plastic &amp; Packaging (94%
